@@ -1,0 +1,45 @@
+import cv2 #ini merupakan code digunakan untuk membaca, menulis, menampilkan, memproses, dan menganalisis gambar dan video.
+import matplotlib.pyplot as plt #merupakan code yang digunakan untuk membuat grafik dan plot untuk memvisualisasikan data.
+import numpy as np #digunakan untuk melakukan operasi matematika pada data, seperti penjumlahan, pengurangan, perkalian, dan pembagian.
+
+img = cv2.imread("pcdd.jpg") #disini kita akan memanggil sebuah gambah yang bernama pccd.jpg
+rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) #ini merupakan proses untuk mengubah gambar dari BGR ke RGB
+plt.imshow(rgb)
+
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #ini adalah code yang digunakan untuk mengubah gambar dari BGR ke Gray
+alpha = 1.0 #Ini merupakan code untuk membuat kontras yang dimana jika semakin tinggi angkanya maka akan semakin tinggi tinkat kontrasnya
+beta = 0 #code ini berfungsi untuk menambahkan kecerahan pada gambar
+adjusted = cv2.convertScaleAbs(img, alpha=alpha, beta=beta) #dan pada code berikut gunanya untuk mengontrol kontras dan kecerahan pada gambar
+plt.figure(figsize=(10,5)) #disini saya membuat plot dengan menentukan ukuran yang saya inginkan
+plt.subplot(1,2,2) #dan ini adalah subplot yang berada didalam plot
+plt.title('citra kontras') #untuk memberikan judul pada gambar saat akan di cetak
+plt.imshow(cv2.cvtColor(adjusted, cv2.COLOR_BGR2RGB))
+plt.axis('off')
+
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) #disini saya menggunakan kode ini untuk Fungsi ini mengubah ruang warna gambar.
+alpha = 1.7 #dan saya menerapakn 1.7 untuk membuat warna kontras pada gambar
+beta = 1 #dan 1 untuk kecerahan gambar
+adjusted = cv2.convertScaleAbs(img, alpha=alpha, beta=beta)
+
+plt.figure(figsize=(10,5))
+plt.subplot(1,2,2)
+plt.title('Citra Kontras')
+plt.imshow(cv2.cvtColor(adjusted, cv2.COLOR_BGR2RGB))
+plt.axis('off')
+
+adjusted_rgb = cv2.cvtColor(adjusted, cv2.COLOR_BGR2RGB) #adjusted disini berfungsi untuk menyimpan salinan gambar adjusted yang sudah dalam format RGB.
+merah_adjusted = adjusted_rgb[:,:,0] # Variabel ini menyimpan kanal merah dari gambar adjusted_rgb dengan . Pengindeksan [:,:,0]
+hijau_adjusted = adjusted_rgb[:,:,1] # Variabel ini menyimpan kanal hijau dari gambar adjusted_rgb dengan . Pengindeksan [:,:,1]
+biru_adjusted = adjusted_rgb[:,:,2] # Variabel ini menyimpan kanal biru dari gambar adjusted_rgb dengan . Pengindeksan [:,:,2]
+
+fig, axis = plt.subplots(1, 3, figsize=(10,10))
+ax = axis.ravel()
+
+ax[0].imshow(merah_adjusted, cmap='gray') #untuk mencetak gambar warna merah
+ax[0].set_title('Red Color')
+ax[1].imshow(hijau_adjusted, cmap='gray') #untuk mencetak gambar warna hijau
+ax[1].set_title('Green Color')
+ax[2].imshow(biru_adjusted, cmap='gray') #untuk mencetak gambar warna hijau
+ax[2].set_title('Blue Color')
+
+plt.show()
